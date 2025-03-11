@@ -1,0 +1,91 @@
+#Data Harga Tiket 
+harga_tiket = {
+    3012: {"ekonomi": 800000, "bisnis": 850000, "first_class": 900000},
+    4015: {"ekonomi": 500000, "bisnis": 550000, "first_class": 700000},
+    4050: {"ekonomi": 700000, "bisnis": 750000, "first_class": 850000},
+}
+
+tujuan_maskapai = {
+    3012: "Padang-Jakarta",
+    4015: "Padang-Batam",
+    4050: "Padang-Bandung",
+}
+
+# Tampilan 1: Input data diri
+print("=== Selamat Datang di Sistem Pemesanan Tiket Pesawat ===")
+nama = input("Masukkan nama Anda: ")
+umur = int(input("Masukkan umur Anda:"))
+jenis_kelamin = input("Masukkan jenis kelamin Anda (L/P): ")
+
+# Tampilan 2: Memilih kode maskapai
+print("\nKode Maskapai:")
+for kode, tujuan in tujuan_maskapai.items():
+    print(f"{kode}: {tujuan}")
+
+kode_maskapai = int(input("\nMasukkan kode maskapai yang dipilih: "))
+
+# Validasi kode maskapai
+valid_kode_maskapai = False
+for _ in range(10):
+    if kode_maskapai in harga_tiket:
+        valid_kode_maskapai = True 
+        break
+    print("Kode maskapai tidak valid. Silakan coba lagi.")
+    kode_maskapai = int(input("Masukkan kode maskapai yang dipilih: "))
+
+# Tampilan 3: Memilih jenis maskapai dan jumlah tiket
+print("\nJenis Maskapai:")
+print("1. Ekonomi")
+print("2. Bisnis")
+print("3. First Class")
+
+jenis_maskapai = int(input("\nMasukkan pilihan jenis maskapai (1-3): "))
+
+# Validasi jenis maskapai
+valid_jenis_maskapai = False
+for _ in range(10):  # Batasan iterasi
+    if jenis_maskapai in [1, 2, 3]:
+        valid_jenis_maskapai = True
+        break
+    print("Pilihan jenis maskapai tidak valid. Silakan coba lagi.")
+    jenis_maskapai = int(input("Masukkan pilihan jenis maskapai (1-3): "))
+
+if not valid_jenis_maskapai:
+    print("Anda telah mencoba terlalu banyak. Program dihentikan.")
+    exit()
+
+jumlah_tiket = int(input("Masukkan jumlah tiket yang dipesan: "))
+
+# Validasi jumlah tiket
+valid_jumlah_tiket = False
+for _ in range(10):  # Batasan iterasi
+    if jumlah_tiket > 0:
+        valid_jumlah_tiket = True
+        break
+    print("Jumlah tiket harus lebih dari 0. Silakan coba lagi.")
+    jumlah_tiket = int(input("Masukkan jumlah tiket yang dipesan: "))
+
+if not valid_jumlah_tiket:
+    print("Anda telah mencoba terlalu banyak kali. Program dihentikan.")
+    exit()
+
+#Menentukan harga dan diskon 
+jenis_maskapai_dict = {1: "ekonomi", 2: "bisnis", 3: "first_class"}
+harga_satuan = harga_tiket[kode_maskapai][jenis_maskapai_dict[jenis_maskapai]]
+total_harga = harga_satuan * jumlah_tiket
+
+if jumlah_tiket > 3:
+    diskon = 0.2 * total_harga
+    total_harga -= diskon
+
+# Tampilan 4: Struk pemesanan
+print("\n--- Struk Pemesanan ---")
+print("=" * 30)
+print(f"Nama: {nama}")
+print(f"Umur: {umur}")
+print(f"Jenis Kelamin: {jenis_kelamin}")
+print(f"Kode Maskapai: {kode_maskapai} ({tujuan_maskapai[kode_maskapai]})")
+print(f"Jenis Maskapai: {jenis_maskapai_dict[jenis_maskapai]}")
+print(f"Jumlah Tiket: {jumlah_tiket}")
+print(f"Total Harga: Rp. {total_harga:,}")
+print("=")
