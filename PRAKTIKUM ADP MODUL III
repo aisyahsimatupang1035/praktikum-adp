@@ -1,0 +1,28 @@
+print ("Pemain 1")
+n= int(input("Pilih Angka Positif Sampai Berapa: "))
+k = int(input("angka pingpong: "))
+
+
+for i in range (1,n+1):
+    if i % k == 0:
+       print ("pingpong",end= " ")
+    else:
+        print(i,end=" ")
+
+
+print('\npemain 2')
+while True:
+    r = int(input(f"tebak angka dari 1-{n} :"))
+    if 1 <= r <= n :
+        break
+    else:
+        print(f"tebakan di luar dari rentang 1-{n}, silahkan coba lagi  ")
+        continue
+print(f" angka berada di dalam rentang")
+
+
+print()
+if n==k :
+    print(f"angka {r} adalah pingpong, anda kalah!")
+else:
+    print (f"angka {r} bukan pingpong,anda menang yeay!!!")
