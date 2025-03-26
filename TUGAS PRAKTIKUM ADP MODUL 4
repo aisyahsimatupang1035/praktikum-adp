@@ -1,0 +1,46 @@
+def pesan_kursi():
+    while True:
+        baris = int(input("Masukkan jumlah baris kursi (minimal 4): "))
+        if baris < 4:
+                print("Ukuran minimal bioskop adalah 4x4. Silakan coba lagi.")
+        else:
+                break  
+    while True:
+        kolom = int(input("Masukkan jumlah kolom kursi (minimal 4): "))
+        if kolom < 4:
+                print("Ukuran minimal bioskop adalah 4x4. Silakan coba lagi.")
+        else:
+            break 
+
+    
+kursi = [[
+        i for i in range (baris)
+            for j in range (kolom)
+                [i * kolom + j + 1 ]]]
+
+def tampilkan_kursi(layout_kursi):
+        print("\nLayout Kursi Bioskop:")
+        for baris_kursi in layout_kursi:
+            print(" ".join(str(kursi_nomor) if not isinstance(kursi_nomor, str) else 'X' for kursi_nomor in baris_kursi))
+
+while True: 
+    tampilkan_kursi(kursi) 
+
+    nomor_kursi = int(input("Masukkan nomor kursi yang di ingin kan  (atau 0 untuk selesai): "))
+    if nomor_kursi == 0:
+        print("Terima kasih!")
+        break 
+
+baris_kursi = (nomor_kursi - 1) // kolom
+kolom_kursi = (nomor_kursi - 1) % kolom
+
+            
+if baris_kursi < 0 or baris_kursi >= baris or kolom_kursi < 0 or kolom_kursi >= kolom:
+    print("Nomor kursi tidak valid.")
+elif(kursi[baris_kursi][kolom_kursi], str) and kursi[baris_kursi][kolom_kursi] == 'X':
+    print("Kursi sudah dipesan.")
+else:
+    kursi[baris_kursi][kolom_kursi] = 'X'
+    print(f"Kursi {nomor_kursi} berhasil dipesan!")
+     
+pesan_kursi()
