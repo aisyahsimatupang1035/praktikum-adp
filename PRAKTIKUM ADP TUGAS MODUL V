@@ -1,0 +1,40 @@
+jumlah_mahasiswa = int(input("Masukkan jumlah mahasiswa: "))
+
+data_mahasiswa = []
+
+# Menginput data untuk setiap mahasiswa kelas adp
+for i in range(jumlah_mahasiswa):
+    print(f"\nMahasiswa ke-{i+1}")
+    nama = input("Nama: ")
+    preetest = float(input("Nilai pretest: "))
+    posttest = float(input("Nilai posttest: "))
+    makalah = float(input("Nilai makalah: "))
+    
+    # Rumus menghitung nilai akhir mahasiswa kelas adp
+    nilai_akhir = (0.4 * preetest) + (0.4 * posttest) + (0.2 * makalah)
+    data_mahasiswa.append([nama, nilai_akhir])
+
+# Menampilkan tabel nama dan nilai akhir mahasiswa kelas adp
+print("\nTabel Nilai Mahasiswa")
+print(f"{"Nama Mahasiswa":<20} | {"Nilai akhir":<20}")
+for data in data_mahasiswa:
+    print("-"*38)
+    print(f"{data[0]:<20} | {data[1]}")
+    
+
+# Menghitung rata-rata nilai akhir
+total_nilai = sum([data[1] for data in data_mahasiswa])
+rata_rata = total_nilai / jumlah_mahasiswa
+print(f"\nRata-rata nilai akhir kelas: {rata_rata:}")
+
+# Menentukan nilai maksimum dan minimum mahasiswa kelas adp
+nilai_tertinggi = max(data_mahasiswa)
+nilai_terendah = min(data_mahasiswa)
+print(f"Nilai tertinggi: {nilai_tertinggi[1]:} oleh {nilai_tertinggi[0]}")
+print(f"Nilai terendah : {nilai_terendah[1]:} oleh {nilai_terendah[0]}")
+
+# Menampilkan mahasiswa yang nilai akhirnya di atas rata-rata
+print("\nMahasiswa dengan nilai di atas rata-rata:")
+for data in data_mahasiswa:
+    if data[1] > rata_rata:
+        print(f"{data[0]} ({data[1]:})")
