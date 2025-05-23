@@ -1,0 +1,276 @@
+baris1 = int(input("Masukkan jumlah baris matriks pertama: "))
+kolom1 = int(input("Masukkan jumlah kolom matriks pertama: "))
+
+matriks1 = []
+print("Masukkan elemen matriks pertama:")
+for i in range(baris1):
+    row = []
+    for j in range(kolom1):
+        row.append(int(input(f"Elemen [{i}][{j}]: ")))
+    matriks1.append(row)
+
+baris2 = int(input("Masukkan jumlah baris matriks kedua: "))
+kolom2 = int(input("Masukkan jumlah kolom matriks kedua: "))
+
+matriks2 = []
+print("Masukkan elemen matriks kedua:")
+for i in range(baris2):
+    row = []
+    for j in range(kolom2):
+        row.append(int(input(f"Elemen [{i}][{j}]: ")))
+    matriks2.append(row)
+
+print("=== Kalkulator Matriks ===")
+print("Pilih operasi:")
+print("1. Penjumlahan")
+print("2. Pengurangan")
+print("3. Perkalian")
+print("4. Determinan")
+print("5. Invers Matriks")
+print("6. Transpos Matriks ")
+
+pilihan = int(input("Masukkan pilihan (1-4): "))
+if pilihan == 1:
+    if baris1 == baris2 and kolom1 == kolom2:
+        hasil = []
+        for i in range(baris1):
+            row = []
+            for j in range(kolom1):
+                row.append(matriks1[i][j] + matriks2[i][j])
+            hasil.append(row)
+        print("Hasil Penjumlahan:")
+        for row in hasil:
+            print(row)
+    else:
+        print("Matriks harus berukuran sama untuk penjumlahan.")
+
+elif pilihan == 2:
+    if baris1 == baris2 and kolom1 == kolom2:
+        hasil = []
+        for i in range(baris1):
+            row = []
+            for j in range(kolom1):
+                row.append(matriks1[i][j] - matriks2[i][j])
+            hasil.append(row)
+        print("Hasil Pengurangan:")
+        for row in hasil:
+                print(row)
+        else:
+            print("Matriks harus berukuran sama untuk pengurangan.")
+
+elif pilihan == 3:
+#determinan matriks 1
+    if kolom1 == baris2:
+        hasil = []
+        for i in range(baris1):
+            row = []
+            for j in range(kolom2):
+                total = 0
+                for k in range(baris2):
+                    total += matriks1[i][k] * matriks2[k][j]
+                row.append(total)
+            hasil.append(row)
+        print("Hasil Perkalian:")
+        for row in hasil:
+            print(row)
+    else:
+        print("Jumlah kolom matriks pertama harus sama dengan jumlah baris matriks kedua untuk perkalian.")
+        
+elif pilihan == 4 :
+    if baris1 == kolom1 == 2:
+        hasil = []
+        for i in range(baris1):
+            row = []
+            for j in range(kolom1):
+                row.append(matriks1[0][0] * matriks1[1][1] - matriks1 [0][1]* matriks1 [1][0])
+        hasil.append(row)
+        print("Hasil Determinan Matriks 1:")
+        for row in hasil:
+            print(row)
+    elif baris1 == kolom1 == 3 :
+        hasil = []
+        for i in range(baris1):
+            row = []
+            for j in range(kolom1):
+                row.append(matriks1[0][0] * matriks1[1][1] * matriks1[2][2] + matriks1[0][1] * matriks1[1][2] * matriks1[2][0] + 
+                               matriks1[0][2] * matriks1[1][0] * matriks1[2][1] - matriks1[0][2] * matriks1[1][1] * matriks1[2][0] - 
+                               matriks1[0][0] * matriks1[1][2] * matriks1[2][1] - matriks1[0][1] * matriks1[1][0] * matriks1[2][2])
+        hasil.append(row)
+        print("Hasil Determinan Matriks 1:")
+        for row in hasil:
+            print(row)
+    else :
+        print("Determina Matrik 1 tidak dapat di hitung")
+#determinan matriks 2
+    if baris1 == kolom1 == 2:
+        hasil = []
+        for i in range(baris1):
+            row = []
+            for j in range(kolom1):
+                row.append(matriks2[0][0] * matriks2[1][1] - matriks2 [0][1]* matriks2 [1][0])
+        hasil.append(row)
+        print("Hasil Determinan Matriks 2:")
+        for row in hasil:
+            print(row)
+    elif baris1 == kolom1 == 3 :
+        hasil = []
+        for i in range(baris1):
+            row = []
+            for j in range(kolom1):
+                row.append(matriks2[0][0] * matriks2[1][1] * matriks2[2][2] + matriks2[0][1] * matriks2[1][2] * matriks2[2][0] + 
+                               matriks2[0][2] * matriks2[1][0] * matriks2[2][1] - matriks2[0][2] * matriks2[1][1] * matriks2[2][0] - 
+                               matriks2[0][0] * matriks2[1][2] * matriks2[2][1] - matriks2[0][1] * matriks2[1][0] * matriks2[2][2])
+        hasil.append(row)
+        print("Hasil Determinan Matriks 2:")
+        for row in hasil:
+            print(row)
+    else :
+        print("Determina Matriks 2 tidak dapat di hitung")
+
+elif pilihan == 5 :
+#invers matriks 1
+    if baris1 == kolom1 == 2:
+        det = matriks1[0][0] * matriks1[1][1] - matriks1[0][1] * matriks1[1][0]
+        if det != 0:
+            adjoin = [[matriks1[1][1], -matriks1[0][1]],
+                      [-matriks1[1][0], matriks1[0][0]]]
+            hasil = []
+            for i in range(2):
+                row = []
+                for j in range(2):
+                    row.append(adjoin[i][j] / det)
+                hasil.append(row)
+            print("Hasil Invers Matriks 1:")
+            for row in hasil:
+                print(row)
+        else:
+            print("Matriks 1 tidak memiliki invers karena determinan = 0")
+    elif baris1 == kolom1 == 3:
+        det = (
+            matriks1[0][0] * matriks1[1][1] * matriks1[2][2] + matriks1[0][1] * matriks1[1][2] * matriks1[2][0] +
+            matriks1[0][2] * matriks1[1][0] * matriks1[2][1] - matriks1[0][2] * matriks1[1][1] * matriks1[2][0] -
+            matriks1[0][0] * matriks1[1][2] * matriks1[2][1] - matriks1[0][1] * matriks1[1][0] * matriks1[2][2])
+        if det != 0:
+            cofaktor = [[0,0,0],
+                        [0,0,0],
+                        [0,0,0]]
+            for i in range(3):
+                for j in range(3):
+                    minor = []
+                    for m in range(3):
+                        if m != i:
+                            baris_minor = []
+                            for n in range(3):
+                                if n != j:
+                                    baris_minor.append(matriks1[m][n])
+                            minor.append(baris_minor)
+                    cofaktor[i][j] = ((-1) ** (i + j)) * (minor[0][0]*minor[1][1] - minor[0][1]*minor[1][0])
+            adjoint = [[cofaktor[j][i] for j in range(3)] for i in range(3)]
+            hasil = []
+            for i in range(3):
+                row = []
+                for j in range(3):
+                    row.append(adjoint[i][j] / det)
+                hasil.append(row)
+            print("Hasil Invers Matriks 1:")
+            for row in hasil:
+                print(row)
+        else:
+            print("Matriks 1 tidak memiliki invers karena determinan = 0")
+#matriks 2
+    if baris1 == kolom1 == 2:
+        det = matriks2[0][0] * matriks2[1][1] - matriks2[0][1] * matriks2[1][0]
+        if det != 0:
+            adjoin = [[matriks2[1][1], -matriks2[0][1]],
+                      [-matriks2[1][0], matriks2[0][0]]]
+            hasil = []
+            for i in range(2):
+                row = []
+                for j in range(2):
+                    row.append(adjoin[i][j] / det)
+                hasil.append(row)
+            print("Hasil Invers Matriks 2:")
+            for row in hasil:
+                print(row)
+        else:
+            print("Matriks 2 tidak memiliki invers karena determinan = 0")
+    elif baris1 == kolom1 == 3:
+        det = (
+            matriks2[0][0] * matriks2[1][1] * matriks2[2][2] + matriks2[0][1] * matriks2[1][2] * matriks2[2][0] +
+            matriks2[0][2] * matriks2[1][0] * matriks2[2][1] - matriks2[0][2] * matriks2[1][1] * matriks2[2][0] -
+            matriks2[0][0] * matriks2[1][2] * matriks2[2][1] - matriks2[0][1] * matriks2[1][0] * matriks2[2][2])
+        if det != 0:
+            cofaktor = [[0,0,0],
+                        [0,0,0],
+                        [0,0,0]]
+            for i in range(3):
+                for j in range(3):
+                    minor = []
+                    for m in range(3):
+                        if m != i:
+                            baris_minor = []
+                            for n in range(3):
+                                if n != j:
+                                    baris_minor.append(matriks1[m][n])
+                            minor.append(baris_minor)
+                    cofaktor[i][j] = ((-1) ** (i + j)) * (minor[0][0]*minor[1][1] - minor[0][1]*minor[1][0])
+            adjoint = [[cofaktor[j][i] for j in range(3)] for i in range(3)]
+            hasil = []
+            for i in range(3):
+                row = []
+                for j in range(3):
+                    row.append(adjoint[i][j] / det)
+                hasil.append(row)
+            print("Hasil Invers Matriks 2:")
+            for row in hasil:
+                print(row)
+        else:
+            print("Matriks 2 tidak memiliki invers karena determinan = 0")
+
+elif pilihan == 6 :
+#matriks 1
+    if baris1 == kolom1 == 2:
+        transpos = [[0,0],
+                    [0,0]]
+        for i in range (2):
+            for j in range(2):
+                transpos[j][i] = matriks1[i][j]
+        print("Hasil transpos dari Matriks 1 ")
+        for row in transpos :
+            print(row)
+    elif baris1 == kolom1 == 3:
+        transpos = [[0,0,0],
+                    [0,0,0]
+                    [0,0,0]]
+        for i in range(3):
+            for j in range(3):
+                transpos[j][i] = matriks1[i][j]
+        print("Hasil transpos dari Matriks 1 ")
+        for row in transpos :
+            print(row)
+#matriks 2
+    if baris1 == kolom1 == 2:
+        transpos = [[0,0],
+                    [0,0]]
+        for i in range (2):
+            for j in range(2):
+                transpos[j][i] = matriks2[i][j]
+        print("Hasil transpos dari Matriks 2 ")
+        for row in transpos :
+            print(row)
+    elif baris1 == kolom1 == 3:
+        transpos = [[0,0,0],
+                    [0,0,0]
+                    [0,0,0]]
+        for i in range(3):
+            for j in range(3):
+                transpos[j][i] = matriks2[i][j]
+        print("Hasil transpos dari Matriks 2 ")
+        for row in transpos :
+            print(row)
+else :
+    print("pilihan tidak valid")
+
+        
+
+
