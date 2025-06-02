@@ -1,0 +1,49 @@
+with open('inventaris_buku.txt', 'w') as file:
+    file.write("ISBN1;Laskar Pelangi; Andrea Hirata;25;55000;65000\n")
+    file.write("ISBN2;Bumi Manusia;Pramoedya Ananta Toer;15;75000;88000\n")
+    file.write("ISBN3;Negeri 5 Menara;Ahmad Fuadi;30;60000;70000\n")
+    file.write("ISBN4;Ayah;Andrea Hirata;20;58000;68000\n")
+    file.write("ISBN5;Perahu Kertas;Dee Lestari;18;65000;75000\n")
+    file.write("ISBN6;Sang Pemimpi;Andrea Hirata;22;56000;66000\n")
+    file.write("ISBN7;Marmut Merah Jambu;Raditya Dika;3;48000;58000\n")
+    file.write("ISBN8;Anak Semua Bangsa;Pramoedya Ananta Toer;12;80000;95000\n")
+    file.write("ISBN9;Ronggeng Dukuh Paruk;Ahmad Tohari;2;52000;62000\n")
+    file.write("ISBN10;Cantik Itu Luka;Eka Kurniawan;16;70000;80000\n")
+
+
+dictionary_buku = {}
+with open('inventaris_buku.txt', 'r') as file:
+    lines = file.readlines()
+    for line in lines:
+        data = line.split(';')
+        isbn = data[0]
+        dictionary_buku[isbn] = {
+            'Judul_Buku': data[1],
+            'Penulis': data[2],
+            'Stok': int(data[3]),
+            'Harga_Beli': int(data[4]),
+            'Harga_Jual': int(data[5]),
+            'Potensi_Keuntungan': 0
+        }
+
+for isbn, detail_buku in dictionary_buku.items():
+    keuntungan = (detail_buku['Harga_Jual'] - detail_buku['Harga_Beli']) *detail_buku['Stok']
+    detail_buku['Potensi_Keuntungan'] = keuntungan
+
+with open('laporan_inventaris_buku.txt', 'w') as file:
+    file.write("ISBN;Judul Buku;Penulis;Stok;Harga Beli;Harga Jual;Potensi Keuntungan\n")
+    for isbn, detail_buku in dictionary_buku.items():
+        file.write(f"{isbn};{detail_buku['Judul_Buku']};{detail_buku['Penulis']};{detail_buku['Stok']};{detail_buku['Harga_Beli']};{detail_buku['Harga_Jual']};{detail_buku['Potensi_Keuntungan']}\n")
+
+potensi = [detail_buku['Potensi_Keuntungan'] for detail_buku in dictionary_buku.values()]
+max_keuntungan = max(potensi)
+min_keuntungan = min(potensi)
+
+total_nilai_inventaris = sum(detail_buku['Stok'] * detail_buku['Harga_Beli'] for detail_buku in dictionary_buku.values())
+
+buku_restock = [detail_buku['Judul_Buku'] for detail_buku in dictionary_buku.values() if detail_buku['Stok'] < 5]
+
+print("Potensi Keuntungan Tertinggi:", max_keuntungan)
+print("Potensi Keuntungan Terendah:", min_keuntungan)
+print("Total Nilai Inventaris:", total_nilai_inventaris)
+print("Buku yang perlu restock:",buku_restock)
