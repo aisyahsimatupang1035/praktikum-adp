@@ -1,0 +1,27 @@
+import time
+import os
+os.system('cls')
+from termcolor import colored
+
+print(colored("|||||||||||||||||||||||","red","on_red"))
+print(colored("|||||||||||||||||||||||","red","on_red"))
+print(colored("||                   ||","red","on_red"))
+print(colored("||                   ||","red","on_red"))
+print(colored("||      ||||||       ||","red","on_red"))
+print(colored("||      ||||||       ||","red","on_red"))
+print(colored("||                   ||","red","on_red"))
+print(colored("||                   ||","red","on_red"))
+print(colored("|||||||||||||||||||||||","red","on_red"))
+print(colored("|||||||||||||||||||||||","red","on_red"))
+print("        YOUTUBE")
+print("-----------------------")
+
+for i in range(21):  
+    print("\rMemuat aplikasi: [" + "-" * i + " " + "]", end="")
+    time.sleep(0.3)
+
+time.sleep(1)
+print("\n" + "=" * 30)
+print("📺  Selamat datang di Aplikasi YouTube")
+print("✅  Streaming video, pencarian,vidio short, dan lainnya!")
+print("="*30)
